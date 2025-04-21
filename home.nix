@@ -8,6 +8,18 @@
   # manage.
   home.username = "gio";
   home.homeDirectory = "/home/gio";
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -20,10 +32,13 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    pkgs.git
-    pkgs.openvpn3
-    pkgs.google-chrome
+  home.packages = with pkgs; [
+    git
+    google-chrome
+    gnome-themes-extra
+    ripgrep
+    neovim
+    nodejs_22
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -71,10 +86,19 @@
         path = "~/Documents/CDC/.gitconfig"
 
     '';
+    ".vimrc".text = ''
+      set number relativenumber ruler
+    '';
+    ".bash_profile".text = ''
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
+    fi
+    '';
     ".bashrc".text = ''
-    if command -v tmux &> /dev/null && [ -n "PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    if command -v tmux > /dev/null && [ -n "PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
       exec tmux
     fi
+    alias ehome="nvim ~/.config/home-manager/home.nix"
     '';
   };
 
@@ -113,6 +137,13 @@
          bind '"' split-window -c "#{pane_current_path}"
          bind % split-window -h -c "#{pane_current_path}"
        '';
+  };
+  programs.kitty = {
+    enable = true;
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 10;
+    };
   };
 
 }
