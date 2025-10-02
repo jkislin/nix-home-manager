@@ -42,7 +42,14 @@
     rustup
     nixfmt-rfc-style
     python313
+    pre-commit
+    detect-secrets
+    ruff
     authenticator
+    uv
+    jq
+    tree
+    gemini-cli
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -70,11 +77,18 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    "Documents/NIDA/.gitconfig".text = ''
+    [user]
+	email = rellag@nida.nih.gov
+    '';
     "Documents/CDC/.gitconfig".text = ''
     [user]
         email = ap82@cdc.gov
     '';
     ".gitconfig".text = ''
+    [init]
+        defaultBranch = main
+
     [credential]
         helper = store
 
@@ -82,19 +96,26 @@
         name = Giovanni Rella
         email = giomrella@gmail.com
 
+    [includeIf "gitdir:~/Documents/NIDA/**"]
+        path = ~/Documents/NIDA/.gitconfig
+
     [includeif "gitdir:~/Documents/CDC/**"]
         path = "~/Documents/CDC/.gitconfig"
 
     '';
     ".vimrc".text = ''
-      set number relativenumber ruler
+      set number relativenumber ruler showcmd wildmenu
+      " allow :find command to search all files from root
+      set path+=**
+      " include .github folder in :find
+      set path+=.github/**
     '';
     ".bash_profile".text = ''
     if [ -f "$HOME/.bashrc" ]; then
         . "$HOME/.bashrc"
     fi
     '';
-    ".bashrc".text = ''
+    ".bashrctest".text = ''
     # the below gives a shell level counter in the prompt string to see if you have 
     # nested `nix-shell` or `nix develop` shells
     PS1="''${PS1//\\u/"$SHLVL:\\u"}"
@@ -138,7 +159,7 @@
          set-window-option -g mode-keys vi
          bind -T copy-mode-vi v send -X begin-selection
          bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
-         bind P run-shell "tmux show-buffer | xclip -sel clipboard"
+         bind P run-shell "tmux save-buffer /tmp/tmux-buffer && xclip -sel clipboard /tmp/tmux-buffer"
          set-option -sg escape-time 10
          set-option -g default-terminal "screen-256color"
          bind c new-window -c "#{pane_current_path}"
