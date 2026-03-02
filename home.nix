@@ -80,10 +80,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    "Documents/NIDA/.gitconfig".text = ''
-    [user]
-	email = rellag@nida.nih.gov
-    '';
     "Documents/CDC/.gitconfig".text = ''
     [user]
         email = ap82@cdc.gov

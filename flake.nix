@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of gio";
+  description = "Home Manager configuration of Jon";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -29,7 +29,7 @@
               };
             };
           })
-          ["gio" "ap82@ext.cdc.gov"]
+          ["Jon" "qxk3@ext.cdc.gov"]
       ));
     };
 }
