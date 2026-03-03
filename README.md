@@ -15,7 +15,8 @@ This is currently an extremely experimental and minimal example. Use at your own
 
 ## Installation instructions
 1. Clone this repository as `~/.config/home-manager`.
-    - You can do `gh repo clone jkislin/nix-home-manager ~/.config/home-manager`
+    - gh cli: `gh repo clone jkislin/nix-home-manager ~/.config/home-manager`
+    - git cli: `git clone https://github.com/jkislin/nix-home-manager.git ~/.config/home-manager`
 
 2. Install `nix`:
     - `sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon`
