@@ -7,13 +7,18 @@
     
     # The heavy lifting is here - what packages do we want? No apt needed!
     home.packages = with pkgs; [
-      lolcat
-      cowsay
-      neovim
-      htop
-      gh
-      uv
-      R
-      screenfetch
+      # Basic utilities
+      lolcat # rainbow cats
+      cowsay # a cow that says
+      screenfetch # gives you system info
+      neovim # modern vim
+      htop # system resource manager
+      gh # github cli
+
+      # Programming
+      uv # python manager
+      R # R programming language
+      docker 
+      podman
     ];
 }

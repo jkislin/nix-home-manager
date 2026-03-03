@@ -1,6 +1,11 @@
-# Nix Home Manager Config for use with CFA VAP
-> With thanks to https://www.chrisportela.com/posts/home-manager-flake/
-> See: https://nix-community.github.io/home-manager/
+# Nix Home Manager for the CFA VAP
+> With thanks to: 
+> - https://zenoix.com/posts/get-started-with-nix-and-home-manager/#what-is-home-manager
+> - https://www.chrisportela.com/posts/home-manager-flake/
+
+> See: 
+> - https://nix-community.github.io/home-manager/
+> - https://github.com/nix-community/home-manager
 
 This is an extremely experimental nix home manager setup for the CFA VAP (you can also try it on WSL on your GFE. There are ways to get it running on Mac OS, too, though some changes are needed.)
 
@@ -9,14 +14,22 @@ Nix home manager allows us to reproducibly maintain the same environments for al
 This is currently an extremely experimental and minimal example. Use at your own risk for now!
 
 ## Installation instructions
-1. Install nix for [Linux](https://nixos.org/download/#nix-install-linux) or for [Linux in WSL](https://nixos.org/download/#nix-install-windows).
-2. Clone this repository to `~/.config/nix-home-manager`.
-3. Run `nix home-manager init ~/.config/nix-home-manager`.
+1. Clone this repository as `~/.config/home-manager`.
+    - You can do `gh repo clone jkislin/nix-home-manager ~/.config/home-manager`
+
+2. Install `nix`:
+    - `sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon`
+    - For details, see: https://nixos.org/download/#nix-install-linux.
+
+3. Install `home-manager`: 
+    - `nix run github:nix-community/home-manager -- init --switch`
+    - This will initialize the `home-manager` config you cloned in step 1 and also activate it.
 
 ## Customizing your own config
-1. Ideally, fork the repository to your own user in Github, and either initially clone from there or add this new fork as a remote with `git remote add fork <your url>`.
-2. Make changes to `home.nix`.
-3. Commit your changes and push them to github (on your fork).
-4. `nix-home-manager switch ~/.config/nix-home-manager`.
+1. Make changes to `~/.config/home-manager/home.nix`.
+2. Run `home-manager switch` to activate your new changes. That's it!
 
-Also feel free to submit PRs to our larger CFA VAP nix-home-manager config.
+## Submitting your own changes as PRs
+1. Open a new branch in your `.config/home-manager` repository.
+2. Make changes and push your branch.
+3. Open a PR.
