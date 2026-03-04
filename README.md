@@ -29,7 +29,7 @@ This is currently an extremely experimental and minimal example. Use at your own
     - For details, see: https://nixos.org/download/#nix-install-linux.
 
 3. Install `home-manager` and initialize based on the flake in this repository: 
-    - Modify `["vapuser"]` in flake.nix to your `["your_username"]. 
+    - Modify `["vapuser"]` in flake.nix to your `["your_username"]`. 
     - Run `nix run home-manager -- init --switch --flake ~/.config/home-manager`
     - This will initialize the `home-manager` config you cloned in step 1 and also activate it.
 
