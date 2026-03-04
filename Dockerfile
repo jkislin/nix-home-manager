@@ -29,3 +29,6 @@ RUN mkdir -p /home/vapuser/.config/home-manager
 RUN bash -c "sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon"
 RUN echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 ENV PATH=/home/vapuser/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
+ENV USER="vapuser"
+WORKDIR /home/vapuser/.config/home-manager
+RUN nix run home-manager init
