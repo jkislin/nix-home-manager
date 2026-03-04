@@ -24,12 +24,11 @@
               modules = [ ./home.nix ];
               extraSpecialArgs = {
                 inherit user;
-                # remove domain e.g. ap82@ext.cdc.gov -> ap82
-                homedir = builtins.elemAt (builtins.split "@" user) 0;
+                homedir = user;
               };
             };
           })
-          ["qxk3"]
+          ["vapuser"]
       ));
     };
 }

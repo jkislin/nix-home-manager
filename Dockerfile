@@ -10,24 +10,29 @@ FROM ubuntu:24.04
 RUN apt-get update -y && apt-get install curl xz-utils sudo -y
 
 # Add and swap to our test user
-RUN useradd -m -s /bin/bash QXK3
-RUN usermod -aG sudo QXK3
-RUN passwd -d QXK3
-USER QXK3
+RUN useradd -m -s /bin/bash vapuser
+RUN usermod -aG sudo vapuser
+RUN passwd -d vapuser
+USER vapuser
 
 # -------------------
 # Nix Configuration!
 # -------------------
 
 # Create the nix config folder
-RUN mkdir -p /home/QXK3/.config/nix
+RUN mkdir -p /home/vapuser/.config/nix
 
 # Create the home-manager config folder
-RUN mkdir -p /home/QXK3/.config/home-manager
+RUN mkdir -p /home/vapuser/.config/home-manager
 
 # Install nix
 RUN bash -c "sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon"
 RUN echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
-ENV PATH=/home/QXK3/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
-ENV USER="QXK3"
-WORKDIR /home/QXK3/.config/home-manager
+ENV PATH=/home/vapuser/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
+ENV USER="vapuser"
+WORKDIR /home/vapuser/.config/home-manager
+
+RUN chown -R vapuser:vapuser /home/vapuser/.config/home-manager 
+
+# In the container, you'll also need to then run: home-manger switch --flake . to load the volume-mounted changes
+RUN nix run home-manager -- init --switch --flake .

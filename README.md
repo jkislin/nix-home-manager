@@ -28,8 +28,8 @@ This is currently an extremely experimental and minimal example. Use at your own
         - For convenience run: `echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf`.
     - For details, see: https://nixos.org/download/#nix-install-linux.
 
-3. Install `home-manager` and initialize: 
-    - `nix run github:nix-community/home-manager -- init --switch`
+3. Install `home-manager` and initialize based on the flake in this repository: 
+    - `nix run home-manager -- init --switch --flake ~/.config/home-manager`
     - This will initialize the `home-manager` config you cloned in step 1 and also activate it.
 
 ### Customizing your own config
@@ -42,4 +42,7 @@ This is currently an extremely experimental and minimal example. Use at your own
 3. Open a PR.
 
 ### Rapid prototyping
-1. Build the docker image
+- Run `make run` to jump into a development docker container with home-manager installed and initialized.  
+- Then, run `home-manager switch --flake .` to test the `flake.nix`/`home.nix` combination in this repository.
+- You can edit `home.nix` from outside the container and rerun `home-manager switch --flake .` inside the container to test edits.
+- After exiting the container, make sure you run `sudo chown $USER .` to relinquish your git repo ownership back to your local environment.

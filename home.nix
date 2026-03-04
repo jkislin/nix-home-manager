@@ -18,12 +18,11 @@
       screenfetch # gives you system info
       neovim # modern vim
       htop # system resource manager
+      git # git
       gh # github cli
 
       # Programming
       uv # python manager
       R # R programming language
-      docker 
-      podman
     ];
 }
