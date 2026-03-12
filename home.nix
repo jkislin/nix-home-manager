@@ -38,29 +38,31 @@
   
     # most packages are installed here
     home.packages = with pkgs; [
-      # Basic utilities
-      lolcat # rainbow cats
-      cowsay # a cow that says
-      screenfetch # gives you system info
-      neovim # modern vim
-      htop # system resource manager
-      git # git
-      gh # github cli
-      jq # shell json parsing
-      tree # filesystem visualization
-      azure-cli # azure cli!
-      azure-storage-azcopy
-      xclip
-      podman
+        # Basic utilities
+        lolcat # rainbow cats
+        cowsay # a cow that says
+        screenfetch # gives you system info
+        neovim
+        htop # system resource manager
+        git # git
+        gh # github cli
+        jq # shell json parsing
+        tree # filesystem visualization
+        azure-cli # azure cli!
+        azure-storage-azcopy
+        xclip
+        podman
+        gcc
 
-      # Programming
-      cargo
-      cargo-binstall
-      python313
-      R # R programming language
-      julia
-      nodejs # npm, node
-      pre-commit
-      ruff
-    ];
+        # Programming
+        cargo
+        cargo-binstall
+        python313
+        R # R programming language
+        rstudio
+        julia
+        nodejs # npm, node
+        pre-commit
+        ruff
+      ];
 }
