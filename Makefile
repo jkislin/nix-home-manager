@@ -2,11 +2,8 @@
 
 # Prototyping commands - use outside of container only:
 
-build:
-	docker build . -t vap-hm
-
-run: build
-	docker run -it --rm vap-hm
+test:
+	docker build . -t vap-hm && docker run -it --rm vap-hm
 
 # Install command - use outside of container only:
 

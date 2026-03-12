@@ -25,7 +25,7 @@ Then you can iteratively:
 1. Modify `home.nix`. (Optional) 
     - You can try adding new packages, etc. 
     - There are lots of examples of things you can do with `home.nix` on github and elsewhere.
-2. `make run` 
+2. `make test` 
     - This builds and jumps into a development docker container with `home-manager` installed and initialized, using `flake.nix` and `home.nix` defined here.
     - If you don't like Makefiles, you can run `docker build -t vap-hm . && docker run -it --rm vap-hm bash` instead. It does the same thing.
     - This allows you to have a fully fresh session each time without modifying your existing system just yet.
@@ -36,20 +36,21 @@ Once you're satisfied with prototyping, you can try installing and initializing 
 
 1. Clone this repository (or move your existing instance from before) to `~/.config/home-manager` and `cd` into it.
 2. Install `nix` on your machine:
-    1. Run `sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon` to install `nix`.
+    - `sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon`.
         - Use `--no-daemon` instead if you are running nix inside a container or if you want to keep it limited to your user.
         - For details, see: https://nixos.org/download/#nix-install-linux.
 3. Enable the `nix run` subcommand and "flakes" feature:
-    - First, run `mkdir -p ~/.config/nix/` to create the nix config directory.
-    - Then, run `echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf`.
+    1. First, run `mkdir -p ~/.config/nix/` to create the nix config directory.
+    2. Then, run `echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf`.
 4. Install `home-manager` and initialize based on the flake in this repository: 
-    1. Run `nix run home-manager -- init --switch --flake ~/.config/home-manager --impure`
+    - Run `nix run home-manager -- init --switch --flake ~/.config/home-manager --impure`
 
 ## Customization and Contribution
 
 ### Customizing your own config
 1. Make changes to `~/.config/home-manager/home.nix`. For example, you might add to the programs or packages list, or propose a different configuration of an existing program.
 2. Run `home-manager switch --flake ~/.config/home-manager --impure` to activate your new changes. That's it!
+    - For convenience, you can run `make switch` if you're in the top level of this repository.
 
 You can always repeat the ["Rapid Low-risk Prototyping"](#rapid-low-risk-prototyping) process before committing your own changes as an added layer of assurance.
 - Nix also has a concept called "generations" that lets you roll back to any previous config - it's like git but for your whole system.  
