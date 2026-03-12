@@ -15,7 +15,7 @@ For example, instead of writing a script that installs R, python, and the Github
 As of current writing, this is currently an experimental and minimal example. Use at your own risk for now!
 
 ## Rapid low-risk prototyping
-> Make sure you have docker installed and enabled before running the following steps.  
+> Make sure you have both `docker` and `make` installed and enabled before running the following steps.  
 
 Before committing to having your system managed with nix, you can test the config in this repository with docker to see what it will do.
 
