@@ -1,13 +1,13 @@
 # pkgs lets us access the nix store, which has tons of packages you'd want to get with apt etc.
-{config, pkgs, user, homedir, release, ...}: {
+{config, pkgs, user, homedir, release, lib, ...}: {
     nixpkgs.config = {
       allowUnfree = true;
     };
     # Username, homedirectory, and release are handled in flake.nix
     home.username = user;
     home.homeDirectory = homedir;
-    home.stateVersion = release; 
-    
+    home.stateVersion = release;
+
     # Programs and pkgs:
 
     # programs are preferrable to "pkgs" if they exist due to configurability; 
@@ -23,6 +23,9 @@
           enable = true;
           theme = "lambda";
         };
+        initContent = ''
+        cowsay -f dragon "Welcome to CFA VAP HM - now using zsh" | lolcat
+        '';
       };
 
       firefox.enable = true;
