@@ -1,18 +1,18 @@
 # pkgs lets us access the nix store, which has tons of packages you'd want to get with apt etc.
-{config, pkgs, user, homedir, ...}: {
+{config, pkgs, user, homedir, release, ...}: {
     nixpkgs.config = {
       allowUnfree = true;
     };
-    # Home Manager needs a bit of information about you and the paths it should
-    # manage.
+    # Username, homedirectory, and release are handled in flake.nix
     home.username = user;
     home.homeDirectory = homedir;
-    home.stateVersion = "25.11"; # Comment out for error with "latest" version
+    home.stateVersion = release; 
     
-    # programs are preferrable to pkgs if they exist due to configurability; 
-    # however, there are far fewer software available here
-    # GUI apps, daemon-requiring apps, etc usually go here.
-    # (there is not a strict delineation)
+    # Programs and pkgs:
+
+    # programs are preferrable to "pkgs: if they exist due to configurability; 
+    # however, there are far fewer software available as "programs"
+    # All programs are pkgs under the hood, with additional config available
     programs = {
 
       home-manager.enable = true;
@@ -21,14 +21,13 @@
         enable = true;
         oh-my-zsh = {
           enable = true;
-          theme = "robbyrussell";
+          theme = "lambda";
         };
       };
 
       firefox.enable = true;
       docker-cli.enable = true;
       vscode.enable = true;
-      # cargo.enable = true; # released in unstable, not 25.11 or earlier
       tmux.enable = true;
       nushell.enable = true;
       obsidian.enable = true;
@@ -36,33 +35,40 @@
 
     };
   
-    # most packages are installed here
+    # most packages are installed here.
+    # think of these as things you could install with apt on ubuntu
     home.packages = with pkgs; [
         # Basic utilities
         lolcat # rainbow cats
         cowsay # a cow that says
         screenfetch # gives you system info
-        neovim
         htop # system resource manager
-        git # git
+        git
         gh # github cli
         jq # shell json parsing
         tree # filesystem visualization
-        azure-cli # azure cli!
-        azure-storage-azcopy
         xclip
-        podman
-        gcc
+        
+        # GUI apps
+        rstudio 
+        nautilus # gui file manager
 
-        # Programming
+        # Development
         cargo
-        cargo-binstall
+        cargo-binstall # binary installs for rust
         python313
-        R # R programming language
-        rstudio
+        R
         julia
-        nodejs # npm, node
+        nodejs
         pre-commit
         ruff
+        podman
+        gcc
+        neovim
+        emacs
+
+        # Azure
+        azure-cli
+        azure-storage-azcopy
       ];
 }
