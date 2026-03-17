@@ -10,9 +10,13 @@
 
     # Programs and pkgs:
 
-    # programs are preferrable to "pkgs" if they exist due to configurability; 
-    # however, there are far fewer software available as "programs"
+    # Programs are preferrable to "pkgs" if they exist due to configurability; 
+    # However, there are far fewer software available as "programs"
+    
     # All programs are pkgs under the hood, with additional config available
+    
+    # The only thing needed to install a program is to specify <program_name>.enable
+    
     programs = {
 
       home-manager.enable = true;
